@@ -1,0 +1,341 @@
+---
+title: PostalET
+slug: postalet
+tagline: A transparency-first Ethiopian postal code directory.
+description: PostalET is a transparency-first postal code directory built specifically for Ethiopia, treating every postal code as a claim with source attribution and confidence ratings.
+status: Completed
+year: 2026
+featured: true
+category: Information Platform
+stack:
+  - Next.js 16
+  - TypeScript
+  - Tailwind CSS v4
+  - shadcn/ui
+  - Supabase
+  - PostgreSQL
+  - Vercel
+github: https://github.com/LamrotG/PostalET
+live: https://postal-et.vercel.app
+cover: /projects/postalet/cover.png
+---
+
+# PostalET
+
+## Overview
+
+PostalET is a transparency-first postal code directory built specifically for Ethiopia.
+
+Unlike many postal code websites that aggregate information without attribution, PostalET treats every postal code as a claim rather than an unquestionable fact. Every result is accompanied by its original source, a confidence rating, and a clear indication of what is known and what remains unverified.
+
+The project was built around a simple philosophy:
+
+> Transparency before certainty.
+
+Instead of attempting to fabricate missing information or infer postal codes from nearby locations, the application explicitly communicates uncertainty to users.
+
+---
+
+# The Problem
+
+Reliable Ethiopian postal code information is difficult to obtain.
+
+Most existing websites:
+
+* copy information from one another
+* rarely identify where data originated
+* provide no indication of confidence
+* sometimes publish conflicting postal codes
+* encourage users to trust information without evidence
+
+For users filling government forms, shipping addresses, or international applications, this lack of transparency makes it difficult to know whether a postal code is trustworthy.
+
+---
+
+# Goals
+
+The project was designed around several core goals:
+
+* Build a centralized Ethiopian postal code directory.
+* Prioritize transparency over completeness.
+* Attribute every postal code to its source.
+* Never fabricate or estimate missing data.
+* Provide an accessible, responsive search experience.
+* Improve discoverability through strong SEO practices.
+
+---
+
+# Solution
+
+PostalET combines publicly available postal code references into a searchable directory while preserving the provenance of every postal code.
+
+Each entry displays:
+
+* the postal code
+* its geographic location
+* the originating data source
+* a confidence rating
+* supporting references when available
+
+When a postal code cannot be verified, the application clearly communicates that no verified information exists rather than attempting to guess the result.
+
+This approach allows users to make informed decisions based on the available evidence.
+
+---
+
+# Key Features
+
+## Search
+
+Users can search by:
+
+* postal code
+* place name
+* city
+* zone
+* region
+
+Search results are returned quickly with a clean and focused interface.
+
+---
+
+## Confidence Ratings
+
+Every postal code is categorized according to its verification level.
+
+Current confidence levels include:
+
+* High
+* Medium
+* Low
+* Unverified
+
+This provides important context that traditional postal code directories typically omit.
+
+---
+
+## Source Attribution
+
+Every postal code page identifies where the information originated.
+
+Supporting references are presented alongside the primary source to improve transparency and allow independent verification.
+
+---
+
+## Copy to Clipboard
+
+Postal codes can be copied with a single click, improving usability when filling forms or sharing information.
+
+---
+
+## Helpful Empty States
+
+Instead of simply displaying "No Results," the application guides users when postal code information is unavailable and explains what actions they can take next.
+
+---
+
+## Accessibility
+
+Accessibility was considered throughout development.
+
+The application includes:
+
+* semantic HTML
+* keyboard navigation
+* ARIA attributes
+* proper focus management
+
+---
+
+## SEO
+
+The application is optimized for discoverability through:
+
+* page-specific metadata
+* structured JSON-LD
+* sitemap generation
+* robots configuration
+
+Each location is designed to be indexable by search engines.
+
+---
+
+# Architecture
+
+The application follows the Next.js App Router architecture.
+
+The project separates responsibilities into distinct layers:
+
+```
+UI Components
+
+↓
+
+Search Interface
+
+↓
+
+Server/API Layer
+
+↓
+
+Data Access Layer
+
+↓
+
+Supabase Database
+```
+
+Business logic is isolated within reusable library modules while presentation remains component-driven.
+
+The folder structure emphasizes separation between routing, reusable UI components, and data access logic.
+
+---
+
+# Technology Stack
+
+| Technology      | Purpose                                    |
+| --------------- | ------------------------------------------ |
+| Next.js 16      | React framework using the App Router       |
+| TypeScript      | Static typing and improved maintainability |
+| Tailwind CSS v4 | Utility-first styling                      |
+| shadcn/ui       | Reusable UI components                     |
+| Supabase        | PostgreSQL database and backend services   |
+| PostgreSQL      | Storage for places and postal code claims  |
+| Lucide React    | Consistent iconography                     |
+| Vercel          | Hosting and deployment                     |
+
+---
+
+# Data Philosophy
+
+A defining characteristic of PostalET is its data philosophy.
+
+The application deliberately avoids assumptions.
+
+It never:
+
+* estimates postal codes
+* derives codes from nearby locations
+* generates placeholder values
+* presents uncertain information as fact
+
+Instead, missing information remains explicitly marked as unavailable until a trustworthy source can verify it.
+
+This philosophy favors user trust over perceived completeness.
+
+---
+
+# Data Sources
+
+PostalET references multiple publicly available datasets.
+
+One source serves as the primary reference while additional sources provide supporting evidence where available.
+
+Maintaining source attribution allows users to independently evaluate the reliability of the displayed information.
+
+---
+
+# Engineering Decisions
+
+Several technical decisions shaped the project.
+
+### Next.js App Router
+
+The App Router enables server-rendered pages, improved SEO, and scalable routing for individual locations.
+
+### Server Components
+
+Server Components reduce unnecessary client-side JavaScript while improving performance.
+
+### TypeScript
+
+Strict typing helps maintain consistency across components, data models, and search functionality.
+
+### Supabase
+
+Supabase provides a managed PostgreSQL database while simplifying data access for search operations.
+
+---
+
+# User Experience
+
+The interface intentionally avoids unnecessary visual complexity.
+
+Design priorities included:
+
+* fast search
+* clear typography
+* responsive layouts
+* minimal distractions
+* immediate feedback
+* transparent communication
+
+Rather than overwhelming users with excessive information, each page focuses on presenting the postal code alongside the context required to judge its reliability.
+
+---
+
+# Challenges
+
+Some of the primary challenges involved:
+
+* identifying trustworthy public postal code sources
+* handling conflicting information across datasets
+* communicating uncertainty without confusing users
+* designing a search experience for incomplete datasets
+* balancing simplicity with transparency
+
+---
+
+# Lessons Learned
+
+Developing PostalET reinforced several engineering principles.
+
+* Good software should communicate uncertainty instead of hiding it.
+* Trust is built through transparency rather than appearance.
+* Clear information architecture improves usability more than excessive visual design.
+* Strong SEO begins with thoughtful application structure rather than after-the-fact optimization.
+* Well-defined data models simplify future maintenance.
+
+---
+
+# Future Improvements
+
+Potential future enhancements include:
+
+* community verification workflow
+* administrative data management tools
+* advanced filtering
+* search analytics
+* multilingual support
+* historical change tracking
+* expanded geographic coverage
+* public API access
+
+---
+
+# Screenshots
+
+Suggested assets:
+
+```
+cover.png
+
+home.png
+
+search-results.png
+
+place-page.png
+
+about-page.png
+
+mobile-home.png
+```
+
+---
+
+# Reflection
+
+PostalET demonstrates how software can prioritize transparency over assumptions.
+
+Rather than treating incomplete information as a limitation to hide, the project embraces uncertainty as part of the user experience. This philosophy influenced both the application's technical architecture and its interface, resulting in a product that aims to be trustworthy before it aims to be comprehensive.

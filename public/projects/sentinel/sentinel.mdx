@@ -1,0 +1,327 @@
+---
+title: Sentinel
+slug: sentinel
+tagline: A cybercrime investigation and intelligence platform for structured digital investigations.
+description: Sentinel is a cybercrime investigation platform that enables investigators to manage cases, organize evidence, map relationships, reconstruct timelines, and build visual investigative theories within a unified workspace.
+status: In Progress
+year: 2026
+featured: true
+stack:
+  - Next.js
+  - TypeScript
+  - Tailwind CSS
+  - shadcn/ui
+  - PostgreSQL
+  - Neon
+  - Prisma
+  - Better Auth
+  - Vercel
+github: https://github.com/LamrotG/SENTINEL
+live: https://sentinel-inv.vercel.app/login
+cover: /projects/sentinel/cover.png
+gallery:
+  - login.png
+  - dashboard.png
+  - cases.png
+  - evidence.png
+  - workspace.png
+role: Full Stack Developer
+category: Cybercrime Investigation Platform
+highlights:
+  - Case-based investigation management
+  - Visual intelligence workspace
+  - Evidence relationship mapping
+  - Timeline reconstruction
+---
+
+# Overview
+
+Sentinel is a cybercrime investigation and intelligence platform designed for investigators, analysts, and digital forensic teams.
+
+The platform consolidates investigation workflows into a unified environment where cases, evidence, entities, timelines, and investigative reasoning are managed together. Rather than treating investigations as isolated records, Sentinel emphasizes the relationships between digital artifacts and the analytical process behind cybercrime investigations.
+
+Its primary objective is to support structured investigations while providing investigators with tools for visual reasoning and collaborative analysis.
+
+---
+
+# Background
+
+Cybercrime investigations often require investigators to work across multiple disconnected tools including spreadsheets, documents, evidence repositories, communication platforms, and reporting software.
+
+As investigations grow in complexity, maintaining context between evidence, people, infrastructure, and events becomes increasingly difficult.
+
+Sentinel was conceived as a platform that centralizes these workflows while supporting the way investigators naturally think—through relationships, timelines, and evolving investigative theories.
+
+---
+
+# Problem
+
+Traditional investigation workflows commonly suffer from:
+
+* fragmented evidence storage
+* disconnected investigative notes
+* poor visualization of relationships
+* manual timeline reconstruction
+* limited collaboration
+* inconsistent access control
+
+These limitations make complex investigations harder to manage and more difficult to communicate.
+
+---
+
+# Objectives
+
+The project was designed around several objectives:
+
+* Centralize cybercrime investigations.
+* Organize evidence in structured case files.
+* Model relationships between investigative entities.
+* Support collaborative investigations through role-based access.
+* Provide visual tools for analytical reasoning.
+* Generate structured reports for investigation outcomes.
+
+---
+
+# Solution
+
+Sentinel provides investigators with a centralized intelligence platform where every investigation is represented as an individual case.
+
+Each case combines:
+
+* evidence
+* entities
+* timelines
+* investigative notes
+* visual relationship mapping
+* reporting
+
+Rather than forcing investigators into rigid workflows, Sentinel enables investigations to evolve naturally while preserving structure and traceability.
+
+---
+
+# Key Features
+
+## Case Management
+
+Investigations are organized as independent cases with controlled access.
+
+Capabilities include:
+
+* case creation
+* investigator assignment
+* collaboration management
+* lead investigator ownership
+* secure case permissions
+
+---
+
+## Evidence Management
+
+Evidence serves as the foundation of every investigation.
+
+Investigators can:
+
+* upload evidence
+* organize digital artifacts
+* update evidence records
+* associate evidence with cases
+* establish relationships between evidence and investigative entities
+
+---
+
+## Entity Intelligence
+
+The platform models investigation entities including:
+
+* people
+* organizations
+* IP addresses
+* domains
+* devices
+* cryptocurrency wallets
+
+Relationships between entities allow investigators to identify connections that would otherwise remain hidden.
+
+---
+
+## Investigation Workspace
+
+The investigation workspace is the core feature of Sentinel.
+
+Instead of relying solely on tables and dashboards, investigators work within an interactive visual environment.
+
+Objects can be positioned, connected, and analyzed to construct investigative theories and reveal patterns across evidence.
+
+This workspace reflects the reasoning process commonly used during complex investigations.
+
+---
+
+## Timeline Reconstruction
+
+Investigators can reconstruct incidents chronologically by linking evidence and events into a coherent investigative timeline.
+
+This improves understanding of attack progression and supports report generation.
+
+---
+
+## Reporting
+
+Sentinel provides structured reporting capabilities that summarize investigations into organized documents suitable for presentation and review.
+
+---
+
+## Notifications
+
+Real-time notifications keep collaborators informed of invitations, investigation activity, and case updates while respecting access permissions.
+
+---
+
+# Architecture
+
+The platform follows a modular architecture that separates presentation, business logic, and data management.
+
+```text
+Presentation Layer
+
+↓
+
+Case Management
+
+Evidence System
+
+Entity Intelligence
+
+Workspace
+
+Timeline
+
+Reporting
+
+↓
+
+Database
+```
+
+This separation allows features to evolve independently while maintaining a consistent investigation model.
+
+---
+
+# Design Philosophy
+
+Sentinel intentionally avoids the visual style of generic administrative dashboards.
+
+The interface emphasizes:
+
+* information density
+* clear hierarchy
+* focused workflows
+* minimal visual noise
+* professional investigative tooling
+
+Every design decision supports investigator productivity rather than decorative interfaces.
+
+---
+
+# Technology Stack
+
+| Technology        | Purpose                          |
+| ----------------- | -------------------------------- |
+| Next.js           | Application framework            |
+| TypeScript        | Type safety                      |
+| Tailwind CSS      | Styling                          |
+| shadcn/ui         | Reusable UI components           |
+| PostgreSQL / Neon | Relational data storage          |
+| Prisma            | ORM                              |
+| Better Auth       | Authentication and authorization |
+| Vercel            | Deployment                       |
+
+---
+
+# Engineering Challenges
+
+Designing Sentinel required balancing structured case management with flexible investigative workflows.
+
+Some notable challenges included:
+
+* representing complex entity relationships
+* organizing heterogeneous evidence
+* supporting visual reasoning alongside traditional data views
+* designing scalable permission models
+* maintaining clarity within data-dense interfaces
+
+---
+
+# Lessons Learned
+
+Working on Sentinel reinforced several software engineering principles.
+
+* Complex workflows benefit from clear information architecture.
+* Visualization can significantly improve investigative reasoning.
+* Strong access control should be designed early rather than added later.
+* Domain-driven design leads to cleaner feature boundaries.
+* Modular systems are easier to extend as requirements evolve.
+
+---
+
+# Future Improvements
+
+Planned enhancements include:
+
+* graph database integration for relationship analysis
+* advanced evidence indexing
+* AI-assisted investigation summaries
+* collaboration comments
+* audit logging
+* real-time collaborative editing
+* external intelligence integrations
+* advanced search across investigation data
+
+---
+
+# Screenshots
+
+Suggested assets:
+
+* login.png
+* dashboard.png
+* case-details.png
+* evidence.png
+* workspace.png
+* timeline.png
+* reports.png
+
+---
+
+# Reflection
+
+Sentinel represents an exploration of how software can support investigative thinking rather than simply storing information.
+
+The project focuses on modeling relationships, preserving investigative context, and providing analysts with tools that mirror real-world investigative workflows. It demonstrates the importance of combining sound software architecture with domain-specific design to create applications that are both technically robust and practical for complex analytical work.
+
+# Demo Access
+
+The application includes several preconfigured demonstration accounts that represent different investigation roles within the platform.
+
+> **Note**
+>
+> These credentials are provided solely for evaluating the application. They do not represent real users or organizations.
+
+| Name         | Username     | Password          | Department      |
+| ------------ | ------------ | ----------------- | --------------- |
+| Sarah Chen   | `fin/001/22` | `sentinel-fin001` | Financial Crime |
+| Marcus Reed  | `inv/001/21` | `sentinel-inv001` | Investigation   |
+| Elena Torres | `inv/002/24` | `sentinel-inv002` | Investigation   |
+| David Holt   | `for/001/23` | `sentinel-for001` | Forensics       |
+
+## Recommended Evaluation Flow
+
+To explore the platform:
+
+1. Sign in using any of the demo accounts.
+2. Open an investigation case.
+3. Review connected evidence and entities.
+4. Explore the Investigation Workspace.
+5. View the reconstructed timeline.
+6. Generate a report and inspect the notification workflow.
+
+Different accounts may have different permissions depending on their assigned role.

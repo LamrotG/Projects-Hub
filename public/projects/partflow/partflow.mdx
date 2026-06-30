@@ -1,0 +1,341 @@
+---
+title: PartFlow
+slug: partflow
+tagline: A modern cloud-based spare parts inventory and business management platform.
+description: PartFlow is a full-stack inventory management system that centralizes inventory, sales, suppliers, customers, employees, and business analytics into a single web application.
+status: In Progress
+year: 2026
+featured: true
+stack:
+  - Next.js 16
+  - TypeScript
+  - Supabase
+  - PostgreSQL
+  - Supabase Auth
+  - Tailwind CSS v4
+  - shadcn/ui
+  - Recharts
+  - Lucide React
+  - pnpm
+  - Vercel
+github: https://github.com/LamrotG/PartFlow
+live: https://part-flow.vercel.app
+cover: /projects/partflow/cover.png
+gallery:
+  - login.png
+  - dashboard.png
+  - sales.png
+  - products.png
+  - inventory.png
+  - customers.png
+  - suppliers.png
+  - employees.png
+role: Full Stack Developer
+category: Business Inventory Management System
+highlights:
+  - Inventory management
+  - Sales workflow
+  - Role-based authentication
+  - Business analytics dashboard
+---
+
+# Overview
+
+PartFlow is a cloud-based spare parts management system designed to replace spreadsheet-driven inventory tracking with a centralized business platform.
+
+The application combines inventory management, sales processing, customer records, supplier management, employee administration, and business reporting into a unified system. It was designed with a focus on maintainability, usability, and providing a complete workflow for managing day-to-day operations within a spare parts business.
+
+---
+
+# Background
+
+Small and medium-sized businesses frequently rely on spreadsheets or disconnected tools to manage inventory, sales, suppliers, and customer information.
+
+While these approaches are familiar, they often lead to duplicated data, inconsistent stock levels, limited reporting capabilities, and increased manual effort.
+
+PartFlow addresses these challenges by providing a single source of truth for business operations, enabling users to manage inventory and transactions through an integrated web application.
+
+---
+
+# Problem
+
+Managing spare parts inventory involves multiple interconnected processes.
+
+Businesses need to:
+
+* track product quantities
+* process sales accurately
+* maintain supplier relationships
+* manage customer information
+* monitor employee activity
+* analyze business performance
+
+Without a centralized system, maintaining consistency across these processes becomes increasingly difficult as operations grow.
+
+---
+
+# Objectives
+
+The project was built with the following goals:
+
+* Centralize inventory and business operations.
+* Reduce manual stock management.
+* Automate inventory updates after sales.
+* Secure access through authentication and role-based permissions.
+* Provide business insights through dashboards and reporting.
+* Create a scalable architecture suitable for future expansion.
+
+---
+
+# Solution
+
+PartFlow provides an integrated management platform where all operational data is connected.
+
+The application enables users to authenticate securely, manage products, process sales, maintain supplier and customer records, and monitor business performance through a centralized dashboard.
+
+Each module contributes to a unified workflow, ensuring that inventory changes, business records, and reporting remain synchronized across the application.
+
+---
+
+# Key Features
+
+## Authentication & Authorization
+
+The platform uses Supabase Authentication to secure access.
+
+Features include:
+
+* secure login
+* authenticated sessions
+* role-based permissions
+* administrator and employee accounts
+
+Access to application features is determined by user roles, helping protect operational data.
+
+---
+
+## Product & Inventory Management
+
+Products and inventory are managed through dedicated interfaces that allow users to:
+
+* create products
+* update inventory
+* monitor stock levels
+* maintain product records
+
+Inventory serves as the operational foundation for sales and reporting.
+
+---
+
+## Sales Management
+
+Sales transactions automatically update inventory, reducing manual stock adjustments and helping maintain accurate inventory records.
+
+The workflow connects customer information, product inventory, and sales history into a consistent transactional process.
+
+---
+
+## Customer Management
+
+Customer records are stored centrally, allowing sales activities to be associated with customer information while improving data organization.
+
+---
+
+## Supplier Management
+
+Supplier records support inventory procurement workflows and maintain a structured list of business partners.
+
+---
+
+## Employee Management
+
+Administrative users can manage employee accounts and control access through predefined roles.
+
+This enables multiple staff members to collaborate while maintaining operational security.
+
+---
+
+## Dashboard & Analytics
+
+A centralized dashboard presents key business metrics through interactive visualizations.
+
+The dashboard provides quick insights into operational performance and supports informed decision-making.
+
+---
+
+## Audit Logging
+
+User activities are recorded to improve traceability and accountability throughout the system.
+
+Audit logs provide visibility into operational changes while supporting administrative oversight.
+
+---
+
+# Architecture
+
+The application follows a modular full-stack architecture using the Next.js App Router.
+
+```text
+Presentation Layer
+
+↓
+
+Authentication
+
+Inventory
+
+Sales
+
+Customers
+
+Suppliers
+
+Employees
+
+Analytics
+
+↓
+
+Business Logic
+
+↓
+
+Supabase Services
+
+↓
+
+PostgreSQL Database
+```
+
+Each business module is responsible for a specific domain while sharing common authentication, data access, and UI components.
+
+This separation promotes maintainability and future scalability.
+
+---
+
+# Technology Stack
+
+| Technology      | Purpose                                  |
+| --------------- | ---------------------------------------- |
+| Next.js 16      | Full-stack React framework               |
+| TypeScript      | Static typing and maintainability        |
+| Supabase        | Backend services and PostgreSQL database |
+| PostgreSQL      | Relational data storage                  |
+| Supabase Auth   | Authentication and authorization         |
+| Tailwind CSS v4 | Styling system                           |
+| shadcn/ui       | Reusable UI components                   |
+| Recharts        | Business analytics visualizations        |
+| Lucide React    | Icon library                             |
+| pnpm            | Package management                       |
+| Vercel          | Deployment                               |
+
+---
+
+# Design Philosophy
+
+PartFlow prioritizes clarity and operational efficiency over visual complexity.
+
+The interface was designed to:
+
+* reduce unnecessary interactions
+* present business information clearly
+* support rapid data entry
+* maintain consistency across modules
+* provide responsive experiences across devices
+
+Every screen emphasizes usability for administrative workflows.
+
+---
+
+# Engineering Challenges
+
+Developing PartFlow required addressing several interconnected challenges:
+
+* synchronizing inventory after sales
+* maintaining relationships between multiple business entities
+* implementing secure role-based access
+* designing reusable CRUD interfaces
+* presenting analytics in an intuitive format
+* keeping the application modular as features expanded
+
+These challenges reinforced the importance of separating business logic from presentation and designing reusable components.
+
+---
+
+# Lessons Learned
+
+Building PartFlow provided valuable experience in designing business applications.
+
+Key takeaways include:
+
+* Business domains benefit from clear separation of responsibilities.
+* Authentication should be integrated early in application development.
+* Relational databases naturally model interconnected business data.
+* Reusable UI components improve long-term maintainability.
+* Consistent data validation reduces operational errors.
+* Dashboards should prioritize actionable information over excessive metrics.
+
+---
+
+# Future Improvements
+
+Potential future enhancements include:
+
+* barcode and QR code scanning
+* purchase approval workflows
+* multi-location inventory management
+* automated email notifications
+* advanced reporting and exports
+* low-stock alerts
+* supplier performance analytics
+* offline support for inventory operations
+
+---
+
+# Screenshots
+
+Suggested assets:
+
+* login.png
+* dashboard.png
+* sales.png
+* products.png
+* inventory.png
+* customers.png
+* suppliers.png
+* employees.png
+
+---
+
+# Reflection
+
+PartFlow demonstrates the design and implementation of a modern business management application built around real operational workflows.
+
+Rather than focusing solely on CRUD functionality, the project explores how authentication, inventory management, transactional processes, reporting, and modular architecture can work together to create a cohesive full-stack application. It reflects an emphasis on building maintainable software that models real-world business operations while remaining extensible for future growth.
+
+
+# Demo Access
+
+The application includes demo accounts for evaluating different roles in the system.
+
+> These credentials are for demonstration purposes only.
+
+| Role  | Email                | Password |
+| ----- | -------------------- | -------- |
+| Admin | adminadd0@gmail.com  | 12345678 |
+
+## What you can test
+
+* Admin dashboard access
+* Product and inventory management
+* Sales transaction flow
+* Customer and supplier management
+* Role-based permissions
+* Business analytics dashboard
+
+## Suggested Flow
+
+1. Login as **Admin**
+2. Explore inventory and products
+3. Create a sample sale
+4. Observe restricted permissions
