@@ -20,27 +20,6 @@ A minimal, dark-themed showcase for engineering projects and their case studies.
 - [next-mdx-remote](https://github.com/hashicorp/next-mdx-remote) for MDX rendering
 - [gray-matter](https://github.com/jonschlinkert/gray-matter) for frontmatter parsing
 
-## Installation
-
-```bash
-npm install
-```
-
-## Running Locally
-
-```bash
-npm run dev
-```
-
-The app runs at [http://localhost:3000](http://localhost:3000).
-
-## Build
-
-```bash
-npm run build
-npm run start
-```
-
 ## Project Structure
 
 ```
