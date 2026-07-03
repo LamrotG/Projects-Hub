@@ -1,0 +1,210 @@
+---
+
+title: ReadStack
+slug: readstack
+tagline: Save what you mean to read. Actually get through it.
+description: A full-stack reading habit tracker that helps you capture articles, books, and posts into a personal pile, track active reading progress with goals and check-ins, and build a consistent reading habit over time.
+status: live
+year: 2025
+featured: true
+
+stack:
+  - React 18
+  - Vite
+  - React Router v6
+  - Node.js
+  - Express
+  - PostgreSQL
+  - Neon
+  - JWT
+  - bcrypt
+  - Vercel
+  - Render
+
+github: https://github.com/LamrotG/ReadStack
+live: https://read-stack-virid.vercel.app
+
+cover: overview.png
+gallery:
+  - overview.png
+
+role: Full Stack Developer
+duration: 2025
+category: Web Application / Productivity
+
+## highlights:
+
+* Cross-origin JWT auth using Authorization header + localStorage, bypassing third-party cookie blocking across separate Vercel and Render deployments
+* Autosave-on-blur pattern in the read modal: draft state is compared against a saved ref so only changed fields are sent to the server
+* Resilient parallel data loading with Promise.allSettled so a single failed sub-request never blanks the entire dashboard
+
+---
+
+# Overview
+
+## Background
+
+Most reading tools focus on saving content but not on actually getting through it. Bookmarks pile up, read-it-later lists grow, and nothing gets read. ReadStack was built to close that gap — not just as a place to dump links, but as a lightweight system for moving items from "saved" to "done."
+
+## Problem
+
+People save far more than they read. The friction of switching between saving, tracking, and reviewing reading progress across different tools means that saved content rarely gets revisited. There was no simple, personal tool that combined a reading pile, active progress tracking, weekly goals, and post-read reflection in one place.
+
+## Objectives
+
+- Give users a fast, distraction-free way to add reading items (articles, books, posts) to a personal pile
+- Track the lifecycle of each item: Pile → Active → Paused → Done → Archived
+- Support weekly reading goals and daily check-ins to build habit consistency
+- Allow users to leave reviews and notes after finishing an item
+- Keep the experience clean and themeable (dark/light mode) with no external dependencies on the client side
+
+## Solution
+
+ReadStack is a full-stack web application with a React SPA on the frontend and a Node.js/Express REST API on the backend, connected to a PostgreSQL database hosted on Neon. Users sign up with email and password, build their reading pile, move items through reading statuses, log check-ins, set weekly goals, and write reviews — all from a single dashboard.
+
+## Key Features
+
+### Reading Pile with Expanding Entry
+
+An "Add to Pile" component collapses to a single input field and expands inline to reveal type, URL, and description fields. Pasting a URL auto-fetches link metadata (title, description) to pre-fill the form. Clicking outside collapses it if the title is empty.
+
+### Dashboard with Status Tabs and Live Modal
+
+The dashboard organises items into four tabs: Pile, Active, Done, and Archive. Clicking any item card opens a full edit modal. The modal auto-saves individual fields on blur by comparing a draft state against a saved ref — only changed fields are sent to the server. Explicit Save and status-change actions (Start, Pause, Resume, Done, Archive) are also available. Delete requires confirmation before removing the item.
+
+### Avatar Menu and Profile Settings
+
+A persistent avatar in the dashboard top bar opens a dropdown menu with links to Profile Settings and Logout. The settings page lets users update their display name, username, avatar colour, and theme preference, and change their password. All profile changes are applied instantly via optimistic UI.
+
+---
+
+# Architecture
+
+## System Design
+
+The application is split into two independently deployed services:
+
+- **Client** — a Vite-built React SPA served as static files on Vercel. All routing is client-side via React Router v6, with a `vercel.json` rewrite rule pointing every path to `index.html`.
+- **Server** — a Node.js/Express REST API deployed on Render. All data access, authentication, and business logic live here.
+
+The database is a managed PostgreSQL instance on Neon (serverless Postgres with connection pooling over SSL).
+
+## Data Flow
+
+1. User signs up or logs in → server validates credentials, signs a JWT, sets an httpOnly cookie (for same-origin dev), and returns the token in the response body.
+2. Client saves the token to `localStorage` and attaches it as `Authorization: Bearer <token>` on every subsequent request.
+3. The `requireAuth` middleware on the server reads from the cookie first, then falls back to the Authorization header — keeping local development seamless while supporting cross-origin production deployments.
+4. Protected routes (items, goals, check-ins, reviews) reject requests without a valid JWT.
+
+## Technical Decisions
+
+**Authorization header over cookies in production** — the client (`vercel.app`) and server (`onrender.com`) are on different root domains. Modern browsers block third-party cookies even with `SameSite=None; Secure`, so a cookie-only auth strategy was replaced with localStorage + Bearer token. The server still sets the cookie for backward compatibility with local development.
+
+**`Promise.allSettled` for dashboard data loading** — the dashboard fetches items, archived items, weekly goal, and check-ins in parallel. Using `Promise.allSettled` instead of `Promise.all` means a single failed endpoint (e.g., a cold-start timeout on Render) doesn't blank the entire dashboard.
+
+**`node-pg-migrate` with ESM** — the server is a pure ES module (`"type": "module"`). Migrations are written as `.js` files using named exports (`up`/`down`) compatible with ESM, run via `dotenv-cli` to inject the `.env` at migration time only.
+
+**Date columns as plain strings** — PostgreSQL `date` columns are parsed as `YYYY-MM-DD` strings using `pg`'s `types.setTypeParser(1082, val => val)`, preventing server timezone shifts from corrupting date values in JSON responses.
+
+---
+
+# Technology Stack
+
+| Technology | Purpose |
+| ---------- | ------- |
+| React 18 | UI component library and rendering |
+| Vite | Frontend build tool and dev server |
+| React Router v6 | Client-side routing and nested layouts |
+| Node.js v24 | Server runtime |
+| Express | HTTP server and REST API framework |
+| PostgreSQL (Neon) | Relational database, cloud-hosted with SSL |
+| `pg` | PostgreSQL client for Node.js |
+| `node-pg-migrate` | Database schema migrations |
+| JWT (`jsonwebtoken`) | Stateless session tokens |
+| bcrypt | Password hashing (12 salt rounds) |
+| CSS Custom Properties | Design tokens for theming (dark/light) |
+| Figtree (Google Fonts) | UI typeface |
+| Vercel | Frontend static hosting with SPA rewrite |
+| Render | Backend Node.js hosting |
+
+---
+
+# User Experience
+
+## Design Philosophy
+
+ReadStack uses a design system built on CSS custom properties with two elevation models: shadow-based in light mode and border-based in dark mode. This gives the dark theme a flatter, more intentional feel instead of just inverting colours. The Figtree typeface keeps the UI friendly without feeling casual.
+
+The landing page presents a single clear value proposition with two CTAs (Get Started, Sign In), a three-step "How it works" section with icons, and an FAQ accordion — all without any marketing bloat.
+
+## Accessibility
+
+- All form inputs have associated `<label>` elements and explicit `htmlFor` bindings
+- Buttons have descriptive `aria-label` attributes where icon-only
+- Colour contrast ratios are maintained across both themes for text and interactive elements
+- Password fields include a show/hide toggle for usability
+
+## Responsiveness
+
+The layout uses CSS flexbox and grid with relative units throughout. The dashboard pile, modal, and settings page all adapt to narrow viewports. The public nav collapses gracefully on small screens, and all wide content (tables, modals) scrolls inside its own container rather than causing horizontal page scroll.
+
+---
+
+# Engineering Challenges
+
+## Cross-Origin Authentication in Production
+
+### Solution
+
+The initial implementation used an httpOnly cookie with `SameSite=Lax`. In development this worked perfectly — client and server share the same origin (`localhost`). In production, with Vercel and Render on different root domains, the browser silently dropped every `Set-Cookie` response because `SameSite=Lax` cookies are not sent on cross-origin requests.
+
+Switching to `SameSite=None; Secure` partially helped but was blocked by third-party cookie restrictions in Chrome's Privacy Sandbox, Safari's ITP, and Firefox's Enhanced Tracking Protection.
+
+The permanent fix was to return the JWT in the login/signup response body, store it in `localStorage`, and attach it as an `Authorization: Bearer` header on every request. The `requireAuth` middleware was updated to check the header as a fallback after the cookie. This made the auth mechanism domain-agnostic without changing the local development experience.
+
+## Render Cold Starts and Resilient Loading
+
+### Solution
+
+Render's free tier spins down instances after inactivity. The first request after a cold start can take 30–60 seconds. The original dashboard used `Promise.all`, which meant a single slow or failed request (e.g., the archived items endpoint timing out) would reject the entire data load and show an empty dashboard.
+
+Replacing `Promise.all` with `Promise.allSettled` allowed each sub-request (items, archived, goal, check-ins) to be handled independently. Fulfilled results render immediately; failed ones degrade gracefully without affecting the rest of the UI.
+
+---
+
+# Lessons Learned
+
+- **Cookies and cross-origin deployments don't mix well.** Even with the correct `SameSite` and `Secure` flags, third-party cookie blocking is now the browser default. For any SPA + separate API architecture, design for Authorization headers from the start.
+- **Environment variables need explicit verification.** A misconfigured env var on Render (`CLIENT_URL=https://...` as the name instead of the value) passed silently and caused an invalid CORS header that took multiple debugging rounds to surface. Always verify via a `/health` endpoint and browser DevTools response headers.
+- **`Promise.allSettled` should be the default for parallel data fetching** in dashboards where partial data is still useful. `Promise.all` is the right choice only when all results are strictly required.
+- **Build-time vs runtime env vars matter.** Vite bakes `VITE_*` variables into the bundle at build time. Setting them in Vercel's dashboard only takes effect on the next deploy — not instantly. Understanding this distinction saves confusion when changes don't appear immediately.
+
+---
+
+# Future Improvements
+
+- **Email verification** on signup to reduce throwaway accounts
+- **OAuth (Google)** for faster onboarding without a password
+- **Reading streaks and habit visualisations** — a weekly heatmap of check-ins
+- **Browser extension** to add items to the pile directly from any page
+- **Mobile app** via React Native sharing the same API
+- **Public reading lists** — optional shareable profile showing what a user is reading and has finished
+- **Spaced repetition reviews** — prompt users to revisit notes from finished items at increasing intervals
+
+---
+
+# Repository
+
+GitHub: https://github.com/LamrotG/ReadStack
+
+Live Demo: https://read-stack-virid.vercel.app
+
+---
+
+# Reflection
+
+ReadStack started as a utility for personal use and grew into a complete product during development. The biggest technical lesson was around production deployments: things that work seamlessly on `localhost` — especially cookies, CORS, and environment variables — often require explicit, deliberate design decisions to work correctly when client and server live on different infrastructure.
+
+The shift from cookie-based to Bearer token auth, while initially a debugging detour, resulted in a more robust and portable auth mechanism that will scale cleanly to a mobile app or browser extension without any server changes.
+
+The project also reinforced the value of graceful degradation: `Promise.allSettled`, informative error states, and a health endpoint all made the debugging process significantly faster than if the app had failed silently.
