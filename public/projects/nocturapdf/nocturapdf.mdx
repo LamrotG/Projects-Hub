@@ -1,0 +1,232 @@
+---
+title: NocturaPDF
+slug: nocturapdf
+tagline: A dark, focused, offline PDF reader for the desktop and the browser.
+description: NocturaPDF is a minimal PDF reader built for long reads, with a careful dark mode that recolors the interface without distorting the document itself. It runs fully offline as a lightweight Windows desktop app and shares the same reading engine in the browser.
+status: In Progress
+year: 2026
+featured: true
+stack:
+  - React
+  - JavaScript
+  - Vite
+  - pdf.js
+  - Electron
+  - electron-builder
+github: https://github.com/LamrotG/NocturaPDF
+live: https://noctura-pdf.vercel.app
+cover: /projects/nocturapdf/cover.png
+
+role: Full Stack Developer
+category: Desktop & Web PDF Reader
+highlights:
+  - Canvas-based dark mode that recolors chrome, not content
+  - Offline-first, no accounts, no cloud sync
+  - Shared reading engine across desktop and browser
+  - Multi-document tabs with a distraction-free focus mode
+---
+
+# Overview
+
+NocturaPDF is a dark, focused PDF reader built for long reads — available as a lightweight Windows desktop app and as a browser app that shares the same reading engine.
+
+The project is intentionally minimal: no accounts, no cloud sync, no file management. Open a PDF and read it, with a dark mode that recolors the interface without distorting the page itself.
+
+Its primary objective is to make long-form PDF reading comfortable, fast, and free of the clutter found in most general-purpose PDF viewers.
+
+---
+
+# Background
+
+Most PDF readers are built around document management, annotation suites, and productivity features aimed at office workflows. For long, continuous reading — papers, books, manuals — that surface area gets in the way rather than helping.
+
+Dark mode support in existing readers is also frequently poor: naive color inversion distorts images, diagrams, and colored content on the page instead of just the surrounding UI.
+
+NocturaPDF was built to address both problems directly: a reader stripped down to the act of reading, with a dark mode implemented as a proper color remapping layer rather than a blanket filter.
+
+---
+
+# Problem
+
+Common PDF reading tools suffer from:
+
+* cluttered interfaces built for document management, not reading
+* dark modes that invert or distort page content along with the UI
+* heavy, resource-hungry desktop applications
+* inconsistent behavior between desktop and browser versions
+* unnecessary account or cloud-sync requirements for a purely local task
+
+These issues make sustained reading less comfortable and add friction to a task that should be simple.
+
+---
+
+# Objectives
+
+The project was designed around several objectives:
+
+* Provide a distraction-free, dark-mode-first reading experience.
+* Recolor the application chrome without distorting rendered page content.
+* Keep the app fully offline with no accounts or cloud dependencies.
+* Share a single reading engine between the browser and desktop builds.
+* Keep the codebase lightweight, with no heavy state or UI frameworks.
+
+---
+
+# Solution
+
+NocturaPDF provides a single reading surface where every opened document becomes a tab, rendered on canvas via pdf.js, with a dedicated color remapping engine handling dark mode independently of the underlying page content.
+
+Each session combines:
+
+* multi-document tabs
+* canvas-based rendering with smooth scrolling and zoom
+* a collapsible sidebar and focus mode
+* local, offline persistence of reader settings
+
+The same React app and reading engine power both the browser version and the Electron desktop build, which skips the marketing site and opens straight into the reader.
+
+---
+
+# Key Features
+
+## Dark Mode Rendering
+
+A careful dark mode recolors the chrome — toolbar, sidebar, tabs — without distorting the document content underneath.
+
+Capabilities include:
+
+* canvas-level color remapping for rendered PDF pages
+* UI theme separate from document color handling
+* consistent behavior across desktop and browser
+
+---
+
+## Document Reading
+
+Canvas-based rendering built on pdf.js provides the core reading surface.
+
+Readers can:
+
+* scroll smoothly through long documents
+* zoom in and out without quality loss
+* open multiple documents as tabs
+* switch between open documents without losing scroll position
+
+---
+
+## Focus & Layout
+
+The reading surface is built around minimizing distraction.
+
+* collapsible sidebar
+* distraction-free focus mode
+* app chrome (top bar, tab bar) kept minimal and unobtrusive
+
+---
+
+## Offline Persistence
+
+Reader settings and preferences are persisted locally via `localStorage`, with no server, account, or network dependency required to use the app.
+
+---
+
+## Desktop Application
+
+The desktop build is an Electron wrapper around the same React app and reading engine as the browser version.
+
+On launch it skips the marketing site entirely and opens directly into the PDF reader, behaving like a native reader app rather than a website.
+
+---
+
+# Architecture
+
+The project follows a clear separation between the shared reading engine, app chrome, and platform-specific entry points.
+
+```text
+Electron Main Process / Preload / Menu
+        ↓
+React App (App.jsx)
+        ↓
+Layout (TopAppBar, Sidebar, TabBar)
+        ↓
+Reader (PdfViewer, PageCanvas, ScrollContainer)
+        ↓
+Dark Mode Engine (color remapping)
+        ↓
+Local Storage (settings persistence)
+```
+
+This separation lets the desktop and browser builds share the same reading engine while each platform's entry point stays independent.
+
+---
+
+# Design Philosophy
+
+NocturaPDF intentionally avoids the feature bloat of general-purpose PDF viewers.
+
+The interface emphasizes:
+
+* minimalism over document management features
+* a dark mode that respects document content
+* fast, canvas-based rendering
+* no accounts, no cloud sync, no unnecessary friction
+
+Every design decision supports uninterrupted reading rather than added functionality.
+
+---
+
+# Technology Stack
+
+| Technology       | Purpose                                   |
+| ---------------- | ------------------------------------------ |
+| React 19         | UI framework                              |
+| JavaScript (JSX) | Application logic (no TypeScript)         |
+| Vite             | Build tooling and dev server              |
+| pdf.js           | PDF parsing and canvas-based rendering    |
+| Electron         | Desktop runtime                           |
+| electron-builder | Windows installer packaging               |
+
+---
+
+# Engineering Challenges
+
+Building NocturaPDF required balancing a minimal codebase with a reading experience that feels polished.
+
+Some notable challenges included:
+
+* implementing dark mode as a canvas color remapping layer instead of a CSS filter, to avoid distorting page content
+* keeping a single reading engine consistent across the browser and Electron builds
+* managing multi-tab document state without an external state management library
+* keeping the desktop app's startup behavior (skip marketing site, open reader directly) independent from the browser app's routing
+
+---
+
+# Lessons Learned
+
+Working on NocturaPDF reinforced several software engineering principles.
+
+* Constraints (no TypeScript, no CSS framework, no external state library) can sharpen focus rather than limit it.
+* Sharing a core engine across platforms is easier when platform-specific behavior is isolated at the entry point.
+* Dark mode done well requires understanding the rendering pipeline, not just applying a filter.
+* A minimal feature set, done carefully, can be more valuable than a broad one done loosely.
+
+---
+
+# Future Improvements
+
+Planned enhancements include:
+
+* native android app
+* text search within documents
+* annotation and highlighting support
+* recent-files list backed by local storage
+* customizable keyboard shortcuts
+* more theme choice
+
+---
+
+# Reflection
+
+NocturaPDF represents an exploration of how much can be left out of an application while still making it feel complete.
+
+The project focuses on doing one thing - reading PDFs comfortably in the dark — well, and demonstrates that a small, carefully scoped codebase with a shared engine across desktop and browser can deliver a focused, dependable tool without unnecessary complexity.
